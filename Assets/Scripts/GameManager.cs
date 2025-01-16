@@ -61,10 +61,20 @@ public class GameManager : MonoBehaviour
          enabled = true;
 
          player.gameObject.SetActive(true);
+
          spawner.gameObject.SetActive(true);
          spawner.StartCoroutine("SpawnRoutine");
+
          gameOverText.gameObject.SetActive(false);
          retryButton.gameObject.SetActive(false);
+
+        var healthManager = FindObjectOfType<HealthManager>();
+        if(healthManager != null)
+        {
+            healthManager.currentHits = 0;
+            healthManager.healthAmount = 100f;
+            healthManager.SendMessage("UpdateHealthBar");
+        }
 
          UpdateHiscore();
     }
